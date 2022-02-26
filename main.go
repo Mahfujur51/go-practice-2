@@ -44,12 +44,7 @@ func main() {
 
 				remainingTicket = remainingTicket - userTickets
 				bookigns = append(bookigns, firstName+" "+lastName)
-				// fmt.Printf("The Whole Slice %v\n", bookigns)
-				// fmt.Printf("The First Value %v\n", bookigns[0])
-				// fmt.Printf("Array Type: %T\n", bookigns)
-				// fmt.Printf("Slice lenght %v\n", len(bookigns))
 
-				// fmt.Println("Thank You",firstName,"",lastName,"for booking",email, "Booked", userTickets)
 				fmt.Printf("Thank You %v %v for Booking %v tickets. You Will recive  a confirmation email at  %v \n", firstName, lastName, userTickets, email)
 				fmt.Println(remainingTicket, "Tickets remaining for ", conferenceName)
 
@@ -74,6 +69,16 @@ func main() {
 			}
 
 		} else {
+			if !isValidName {
+				fmt.Println("Fist Name and Last Name must be atleast 2 characters")
+			}
+			if !isValidEmail {
+				fmt.Println("Email Address is not valid")
+
+			}
+			if !isValidTickets {
+				fmt.Println("Number of Tickets You enter is invalid")
+			}
 			fmt.Println("Invalid Input Please Try Again")
 		}
 
