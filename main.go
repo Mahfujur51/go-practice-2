@@ -33,24 +33,49 @@ func main() {
 
 		fmt.Println("Enter the Number of Tickets:")
 		fmt.Scanln(&userTickets)
-		remainingTicket = remainingTicket - userTickets
-		bookigns = append(bookigns, firstName+" "+lastName)
-		// fmt.Printf("The Whole Slice %v\n", bookigns)
-		// fmt.Printf("The First Value %v\n", bookigns[0])
-		// fmt.Printf("Array Type: %T\n", bookigns)
-		// fmt.Printf("Slice lenght %v\n", len(bookigns))
 
-		// fmt.Println("Thank You",firstName,"",lastName,"for booking",email, "Booked", userTickets)
-		fmt.Printf("Thank You %v %v for Booking %v tickets. You Will recive  a confirmation email at  %v \n", firstName, lastName, userTickets, email)
-		fmt.Println(remainingTicket, "Tickets remaining for ", conferenceName)
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTickets := userTickets > 0 && userTickets <= remainingTicket
 
-		firstNames := []string{}
-		for _, booking := range bookigns {
-			var names = strings.Fields(booking)
-			firstNames = append(firstNames, names[0])
+		if isValidName && isValidEmail && isValidTickets {
+
+			if userTickets < remainingTicket {
+
+				remainingTicket = remainingTicket - userTickets
+				bookigns = append(bookigns, firstName+" "+lastName)
+				// fmt.Printf("The Whole Slice %v\n", bookigns)
+				// fmt.Printf("The First Value %v\n", bookigns[0])
+				// fmt.Printf("Array Type: %T\n", bookigns)
+				// fmt.Printf("Slice lenght %v\n", len(bookigns))
+
+				// fmt.Println("Thank You",firstName,"",lastName,"for booking",email, "Booked", userTickets)
+				fmt.Printf("Thank You %v %v for Booking %v tickets. You Will recive  a confirmation email at  %v \n", firstName, lastName, userTickets, email)
+				fmt.Println(remainingTicket, "Tickets remaining for ", conferenceName)
+
+				firstNames := []string{}
+				for _, booking := range bookigns {
+					var names = strings.Fields(booking)
+					firstNames = append(firstNames, names[0])
+				}
+				fmt.Println("The first Names of Bookings are :\n", firstNames)
+
+				noTicketsAvailable := remainingTicket == 0
+
+				if noTicketsAvailable {
+					fmt.Println("Our Conference is booked our. Come back next Year")
+					break
+
+				}
+
+			} else {
+				fmt.Println("we only have", remainingTicket, "Tickets remaining, so you can't book", userTickets)
+
+			}
+
+		} else {
+			fmt.Println("Invalid Input Please Try Again")
 		}
-		fmt.Println("The first Names of Bookings are :\n", firstNames)
 
 	}
-
 }
