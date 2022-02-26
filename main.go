@@ -1,7 +1,10 @@
 //Ticket Booking APp
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	conferenceName := "Go Conference"
@@ -11,26 +14,43 @@ func main() {
 	fmt.Println("We Have total of ", conferenceTicket, " Tickets and ", remainingTicket, " are still Available")
 	fmt.Println("Get Your Tickets here to attend")
 
-	var firstName string
-	var lastName string
-	var email string
-	var userTickets uint
+	var bookigns []string
+	for {
 
-	fmt.Println("Enter Your First Name:")
-	fmt.Scanln(&firstName)
+		var firstName string
+		var lastName string
+		var email string
+		var userTickets uint
 
-	fmt.Println("Enter your last Name:")
-	fmt.Scanln(&lastName)
+		fmt.Println("Enter Your First Name:")
+		fmt.Scanln(&firstName)
 
-	fmt.Println("Enter your Email Address:")
-	fmt.Scanln(&email)
+		fmt.Println("Enter your last Name:")
+		fmt.Scanln(&lastName)
 
-	fmt.Println("Enter the Number of Tickets:")
-	fmt.Scanln(&userTickets)
-	remainingTicket = remainingTicket - userTickets
+		fmt.Println("Enter your Email Address:")
+		fmt.Scanln(&email)
 
-	// fmt.Println("Thank You",firstName,"",lastName,"for booking",email, "Booked", userTickets)
-	fmt.Printf("Thank You %v %v for Booking %v tickets. You Will recive  a confirmation email at  %v \n", firstName, lastName, userTickets, email)
-	fmt.Println(remainingTicket, "Tickets remaining for ", conferenceName)
+		fmt.Println("Enter the Number of Tickets:")
+		fmt.Scanln(&userTickets)
+		remainingTicket = remainingTicket - userTickets
+		bookigns = append(bookigns, firstName+" "+lastName)
+		// fmt.Printf("The Whole Slice %v\n", bookigns)
+		// fmt.Printf("The First Value %v\n", bookigns[0])
+		// fmt.Printf("Array Type: %T\n", bookigns)
+		// fmt.Printf("Slice lenght %v\n", len(bookigns))
+
+		// fmt.Println("Thank You",firstName,"",lastName,"for booking",email, "Booked", userTickets)
+		fmt.Printf("Thank You %v %v for Booking %v tickets. You Will recive  a confirmation email at  %v \n", firstName, lastName, userTickets, email)
+		fmt.Println(remainingTicket, "Tickets remaining for ", conferenceName)
+
+		firstNames := []string{}
+		for _, booking := range bookigns {
+			var names = strings.Fields(booking)
+			firstNames = append(firstNames, names[0])
+		}
+		fmt.Println("The first Names of Bookings are :\n", firstNames)
+
+	}
 
 }
